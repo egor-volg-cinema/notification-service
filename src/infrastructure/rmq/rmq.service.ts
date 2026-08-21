@@ -1,14 +1,15 @@
 import { Injectable, Logger } from '@nestjs/common'
 import { RmqContext } from '@nestjs/microservices'
-import type { Channel, ConsumeMessage } from 'amqplib'
+import { Channel } from 'amqp-connection-manager'
+import { Message } from 'amqplib'
 
 @Injectable()
 export class RmqService {
 	private readonly logger = new Logger(RmqService.name)
 
 	public ack(context: RmqContext): void {
-		const channel = context.getChannelRef() as Channel
-		const message = context.getMessage() as ConsumeMessage
+		const channel = context.getChannelRef()
+		const message = context.getMessage()
 		const tag = message?.fields?.deliveryTag
 
 		if (!tag) return
@@ -20,7 +21,7 @@ export class RmqService {
 
 	public nack(context: RmqContext, requeue = false): void {
 		const channel = context.getChannelRef() as Channel
-		const message = context.getMessage() as ConsumeMessage
+		const message = context.getMessage() as Message
 		const tag = message?.fields?.deliveryTag
 
 		if (!tag) return
