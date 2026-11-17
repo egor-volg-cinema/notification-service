@@ -1,7 +1,7 @@
 import { RmqService } from '@infrastructure/rmq/rmq.service'
 import { Controller } from '@nestjs/common'
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices'
-
+import type { OtpRequestedEvent } from '@egorcolgcinema/contracts'
 import { NotificationsService } from './notifications.service'
 
 @Controller()
@@ -9,11 +9,11 @@ export class NotificationsController {
 	public constructor(
 		private readonly rmqService: RmqService,
 		private readonly notificationsService: NotificationsService
-	) {}
+	) { }
 
 	@EventPattern('auth.otp.requested')
 	public async otpRequested(
-		@Payload() data: any,
+		@Payload() data: OtpRequestedEvent,
 		@Ctx() ctx: RmqContext
 	): Promise<void> {
 		try {
