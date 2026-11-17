@@ -1,7 +1,7 @@
 import { RmqService } from '@infrastructure/rmq/rmq.service'
 import { Controller } from '@nestjs/common'
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices'
-import type { OtpRequestedEvent } from '@egorcolgcinema/contracts'
+import type { OtpRequestedEvent } from '@teacinema/contracts'
 import { NotificationsService } from './notifications.service'
 
 @Controller()

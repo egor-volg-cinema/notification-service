@@ -1,3 +1,3 @@
-import config from '@egorcolgcinema/core/prettier'
+import config from '@teacinema/core/prettier'
 
 export default config
