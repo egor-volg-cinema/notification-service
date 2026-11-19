@@ -3,10 +3,11 @@ import { Module } from '@nestjs/common'
 
 import { NotificationsController } from './notifications.controller'
 import { NotificationsService } from './notifications.service'
+import { MailService } from '@infrastructure/mail/mail.service'
 
 @Module({
 	imports: [RmqModule],
 	controllers: [NotificationsController],
-	providers: [NotificationsService]
+	providers: [NotificationsService, MailService]
 })
-export class NotificationsModule {}
+export class NotificationsModule { }

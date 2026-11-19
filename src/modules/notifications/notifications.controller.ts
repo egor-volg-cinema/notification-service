@@ -17,11 +17,11 @@ export class NotificationsController {
 		@Ctx() ctx: RmqContext
 	): Promise<void> {
 		try {
-			console.log(`OTP event received: ${JSON.stringify(data)}`)
+			await this.notificationsService.sendOtp(data)
 
 			this.rmqService.ack(ctx)
-		} catch (error) {
-			console.log('OTP processing error: ', error.message ?? error)
+		} catch (error: unknown) {
+			console.log('OTP processing error: ', (error as Error).message ?? error)
 
 			this.rmqService.nack(ctx)
 		}

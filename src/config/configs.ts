@@ -13,6 +13,15 @@ export default () => {
         rmq: {
             url: parsed.data.RMQ_URL,
             queue: parsed.data.RMQ_QUEUE
+        },
+        smtp: {
+            host: parsed.data.SMTP_HOST,
+            token: parsed.data.SMTP_TOKEN,
+            port: parsed.data.SMTP_PORT,
+            username: parsed.data.SMTP_USERNAME,
+            password: parsed.data.SMTP_PASSWORD,
+            fromAddress: parsed.data.SMTP_FROM_ADDRESS,
+            secure: parsed.data.SMTP_SECURE
         }
     }
 }
