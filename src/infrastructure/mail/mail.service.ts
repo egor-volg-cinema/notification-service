@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
+import { buildOtpEmail } from './otp-email.template';
 
 @Injectable()
 export class MailService {
@@ -8,7 +9,7 @@ export class MailService {
     await this.transporter.sendMail({
       to: email,
       subject: 'Your OTP code for EgorColgCinema',
-      html: `<p>Your OTP code: ${code}</p>`,
+      html: buildOtpEmail(code),
     });
   }
 }
