@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MailService } from '@infrastructure/mail/mail.service';
-import { OtpRequestedEvent } from '@teacinema/contracts';
+import { EmailChangedEvent, OtpRequestedEvent } from '@teacinema/contracts';
 
 @Injectable()
 export class NotificationsService {
@@ -13,5 +13,11 @@ export class NotificationsService {
 
         if (type === 'email') await this.mailService.sendOtp(identifier, code);
         else console.log(`Sending SMS with OTP code: ${code}`);
+    }
+
+    public async sendEmailChanged(data: EmailChangedEvent) {
+        const { email, code } = data;
+
+        await this.mailService.sendOtp(email, code, 'email-change');
     }
 }

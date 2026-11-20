@@ -1,16 +1,16 @@
 const escapeHtml = (value: string): string =>
-    value
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 
-export function buildOtpEmail(code: string, ttlMinutes = 10): string {
-    const safeCode = escapeHtml(code);
-    const year = new Date().getFullYear();
+export function buildOtpEmail(code: string, ttlMinutes = 10, type: 'sign-in' | 'email-change' | 'phone-change'): string {
+  const safeCode = escapeHtml(code);
+  const year = new Date().getFullYear();
 
-    return `<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8" />
@@ -86,7 +86,7 @@ export function buildOtpEmail(code: string, ttlMinutes = 10): string {
                 <tr>
                   <td class="px" align="center" style="padding:8px 48px 28px 48px;">
                     <p class="text-sub" style="margin:0;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:24px;color:#6e6e73;">
-                      Введите этот код, чтобы войти в аккаунт.
+                      Введите этот код, чтобы ${type === 'sign-in' ? 'войти в аккаунт' : type === 'email-change' ? 'изменить email' : 'изменить номер телефона'}
                     </p>
                   </td>
                 </tr>
@@ -150,3 +150,4 @@ export function buildOtpEmail(code: string, ttlMinutes = 10): string {
 </body>
 </html>`;
 }
+
