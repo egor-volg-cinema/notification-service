@@ -7,4 +7,4 @@ import { RmqService } from './rmq.service'
 	providers: [RmqService],
 	exports: [RmqService]
 })
-export class RmqModule { }
+export class RmqModule {}

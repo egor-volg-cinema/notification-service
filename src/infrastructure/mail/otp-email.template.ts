@@ -1,16 +1,20 @@
 const escapeHtml = (value: string): string =>
-  value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+	value
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#39;')
 
-export function buildOtpEmail(code: string, ttlMinutes = 10, type: 'sign-in' | 'email-change' | 'phone-change'): string {
-  const safeCode = escapeHtml(code);
-  const year = new Date().getFullYear();
+export function buildOtpEmail(
+	code: string,
+	ttlMinutes = 10,
+	type: 'sign-in' | 'email-change' | 'phone-change'
+): string {
+	const safeCode = escapeHtml(code)
+	const year = new Date().getFullYear()
 
-  return `<!DOCTYPE html>
+	return `<!DOCTYPE html>
 <html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8" />
@@ -148,6 +152,5 @@ export function buildOtpEmail(code: string, ttlMinutes = 10, type: 'sign-in' | '
     </tr>
   </table>
 </body>
-</html>`;
+</html>`
 }
-
