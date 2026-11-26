@@ -1,13 +1,13 @@
 import { z } from 'zod'
 
 export enum Environment {
-	Development = 'development',
-	Production = 'production',
+	Dev = 'dev',
+	Prod = 'prod',
 	Test = 'test'
 }
 
 export default z.object({
-	NODE_ENV: z.enum(Environment).default(Environment.Development),
+	NODE_ENV: z.enum(Environment).default(Environment.Dev),
 	RMQ_URL: z.string().nonempty(),
 	RMQ_QUEUE: z.string().nonempty(),
 	SMTP_HOST: z.string().nonempty(),

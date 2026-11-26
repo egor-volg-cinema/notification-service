@@ -11,7 +11,12 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
 		ConfigModule.forRoot({
 			isGlobal: true,
 			load: [configs],
-			expandVariables: true
+			expandVariables: true,
+			envFilePath: [
+				`.env.${process.env.NODE_ENV}.local`,
+				`.env.${process.env.NODE_ENV}`,
+				'.env'
+			]
 		}),
 		RmqModule,
 		NotificationsModule,
